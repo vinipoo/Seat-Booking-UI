@@ -1,66 +1,74 @@
+const container = document.querySelector(".container");
+const seats = document.querySelectorAll(".row .seat:not(.sold)");
+const count = document.getElementById("count");
+const total = document.getElementById("total");
+const movieSelect = document.getElementById("movie");
 
-const container=document.querySelector('.container');
-const seats=document.querySelectorAll('.row .seat:not(.occupited)');
+populateUI();
 
-const count=document.getElementById('count');
-const total=document.getElementById('total');
-const destinationSelect=document.getElementById('destination');
+let ticketPrice = +movieSelect.value;
+
+// Save selected movie index and price
+function setMovieData(movieIndex, moviePrice) {
+  localStorage.setItem("selectedMovieIndex", movieIndex);
+  localStorage.setItem("selectedMoviePrice", moviePrice);
+}
+
+// Update total and count
+function updateSelectedCount() {
+  const selectedSeats = document.querySelectorAll(".row .seat.selected");
+
+  const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
+
+  localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex));
+
+  const selectedSeatsCount = selectedSeats.length;
+
+  count.innerText = selectedSeatsCount;
+  total.innerText = selectedSeatsCount * ticketPrice;
+
+  setMovieData(movieSelect.selectedIndex, movieSelect.value);
+}
 
 
-let price = +destinationSelect.value;
+// Get data from localstorage and populate UI
+function populateUI() {
+  const selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
 
-// const buyseats=document.querySelectorAll('.row .seat(.selected)');
-// buy.addEventListener('click',e=>{
-//     if(e.target.classList.contains('selected') && !e.target.classList.contains('occupited')){
-//         e.target.classList.toggle('occupited');
-//         updateSelected();
-//     }
-// });
+  if (selectedSeats !== null && selectedSeats.length > 0) {
+    seats.forEach((seat, index) => {
+      if (selectedSeats.indexOf(index) > -1) {
+        console.log(seat.classList.add("selected"));
+      }
+    });
+  }
 
+  const selectedMovieIndex = localStorage.getItem("selectedMovieIndex");
 
-container.addEventListener('click',e=>{
-    if(e.target.classList.contains('seat') && !e.target.classList.contains('occupited')){
-        e.target.classList.toggle('selected');
-        updateSelected();
-    }
+  if (selectedMovieIndex !== null) {
+    movieSelect.selectedIndex = selectedMovieIndex;
+    console.log(selectedMovieIndex)
+  }
+}
+console.log(populateUI())
+// Movie select event
+movieSelect.addEventListener("change", (e) => {
+  ticketPrice = +e.target.value;
+  setMovieData(e.target.selectedIndex, e.target.value);
+  updateSelectedCount();
 });
 
+// Seat click event
+container.addEventListener("click", (e) => {
+  if (
+    e.target.classList.contains("seat") &&
+    !e.target.classList.contains("sold")
+  ) {
+    e.target.classList.toggle("selected");
 
-destinationSelect.addEventListener('click',e=>{
-    price = +e.target.value;
-    priceperseat.innerText=price;
-    setDestinationData(e.target.selectedIndex,e.target.value);
-    updateSelected();
-})
+    updateSelectedCount();
+  }
+});
 
-function updateSelected(){
-    const selectedSeats=document.querySelectorAll('.row .seat.selected');
-    const countseats=selectedSeats.length;
-    const seatsIndex=[...selectedSeats].map(seat=>[...seats].indexOf(seat));
-    localStorage.setItem("selectedSeats",JSON.stringify(seatsIndex));
-    count.innerText=countseats;
-    total.innerText=countseats * price;
-    priceperseat.innerText=price;
-    
-}
-function setDestinationData(destinationIndex,destinationPrice){
-    localStorage.setItem("destinationIndex",destinationIndex);
-    localStorage.setItem("destinationPrice",destinationPrice);
-}
-function showDatatoUI(){
-    const selectedSeats=JSON.parse(localStorage.getItem("selectedSeats"));
-    const  selectDestinationIndex=localStorage.getItem("destinationIndex");
-    const selectDestinationPrice=localStorage.getItem("destinationPrice");
-    seats.forEach((seat,index)=>{
-        if(selectedSeats.indexOf(index)>-1){
-            seat.classList.add('selected');
-        }
-    });
-    if(selectDestinationIndex !=null){
-        destinationSelect.selectedIndex=selectDestinationIndex;
-        price=selectDestinationPrice;
-    }
-}
-
-showDatatoUI();
-updateSelected();
+// Initial count and total set
+updateSelectedCount();

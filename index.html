@@ -2,225 +2,131 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Seat Selector</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f7f7f7;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .seat-selector {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .seat {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #90e0ef;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .seat.booked {
-            background-color: #f28d82;
-            cursor: not-allowed;
-        }
-
-        .seat.unavailable {
-            background-color: #d3d3d3;
-            cursor: not-allowed;
-        }
-
-        .seat.selected {
-            background-color: #4caf50;
-            color: white;
-        }
-
-        .seat:hover:not(.booked):not(.unavailable) {
-            background-color: #00b4d8;
-        }
-
-        .seat-map {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            grid-gap: 10px;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .seat {
-                width: 40px;
-                height: 40px;
-            }
-
-            .seat-selector {
-                flex-direction: column;
-            }
-
-            .seat-map {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-
-        .seat-map-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .seat-labels {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-
-        .selected-seats {
-            margin-top: 20px;
-        }
-
-        .seat-controls {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .seat-controls button {
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-    </style>
+    <title>Flight Booking</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <h1>Responsive Seat Selector</h1>
-
-    <div class="seat-selector">
-        <div class="seat-map-wrapper">
-            <div class="seat-map" id="seat-map"></div>
-            <div class="seat-labels">
-                <div><span style="color: #4caf50;">Selected</span></div>
-                <div><span style="color: #90e0ef;">Available</span></div>
-                <div><span style="color: #f28d82;">Booked</span></div>
-                <div><span style="color: #d3d3d3;">Unavailable</span></div>
+        <div class="title">
+            <h1>Flight Booking Online Platform</h1>
+        </div>
+        <div class="fligth-container">
+            <label for="">From :</label>
+            <select name="" id="origin">
+                <option value="">Bangkok - Thailand</option>
+            </select>
+            <label for="">Destination :</label>
+            <select name="" id="destination">
+                <option value="" id="title-destination" disabled selected hidden>Where to?</option>
+                <option value="1000">Paris - French</option>
+                <option value="2500">New York - USA</option>
+                <option value="2700">Rome - Italy</option>
+            </select>
+            <label for="">Date :</label>
+            <input placeholder="When is your trip?" type="text" onfocus="(this.type='date')" id="date">
+        </div>
+        <div class="status">
+            <ul class="showcase">
+                <li>
+                    <div class="seat"></div>
+                    <small>Availabel</small>
+                </li>
+                <li>
+                    <div class="seat selected"></div>
+                    <small>Select</small>
+                </li>
+                <li>
+                    <div class="seat occupited"></div>
+                    <small>Unavailable</small>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="captan"></div>
+            <div class="row" id="first-row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat occupited"></div>
+                <div class="seat occupited"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+            <div class="row" id="mid-row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat occupited"></div>
+                <div class="seat occupited"></div>
+            </div>
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+            <div class="row">
+                <div class="seat occupited"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+            </div>
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat occupited"></div>
+                <div class="seat occupited"></div>
+                <div class="seat"></div>
+            </div>
+            <div class="row">
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
+                <div class="seat"></div>
             </div>
         </div>
-    </div>
-
-    <div class="selected-seats">
-        <h3>Selected Seats:</h3>
-        <ul id="selected-seats-list"></ul>
-    </div>
-
-    <div class="seat-controls">
-        <button onclick="clearSelection()">Clear Selection</button>
-        <button onclick="viewSelectedSeats()">View Selected Seats</button>
-    </div>
-
-    <script>
-        // Data structure with seat states (available, booked, unavailable)
-        const seats = [
-            { id: 1, status: 'available' },
-            { id: 2, status: 'available' },
-            { id: 3, status: 'booked' },
-            { id: 4, status: 'available' },
-            { id: 5, status: 'unavailable' },
-            { id: 6, status: 'available' },
-            { id: 7, status: 'available' },
-            { id: 8, status: 'booked' },
-            { id: 9, status: 'available' },
-            { id: 10, status: 'unavailable' },
-            { id: 11, status: 'available' },
-            { id: 12, status: 'unavailable' },
-            { id: 13, status: 'available' },
-            { id: 14, status: 'available' },
-            { id: 15, status: 'available' },
-            { id: 16, status: 'booked' },
-            { id: 17, status: 'available' },
-            { id: 18, status: 'available' },
-            { id: 19, status: 'unavailable' },
-            { id: 20, status: 'available' },
-        ];
-
-        let selectedSeats = [];
-
-        // Function to create seat map dynamically
-        function createSeatMap() {
-            const seatMap = document.getElementById('seat-map');
-            seatMap.innerHTML = ''; // Clear previous seat map
-
-            seats.forEach(seat => {
-                const seatElement = document.createElement('div');
-                seatElement.classList.add('seat');
-                seatElement.classList.add(seat.status);
-
-                // Add event listener for seat selection
-                seatElement.addEventListener('click', () => toggleSeatSelection(seatElement, seat));
-
-                seatMap.appendChild(seatElement);
-            });
-        }
-
-        // Toggle seat selection on click
-        function toggleSeatSelection(seatElement, seat) {
-            if (seat.status === 'available' && !seatElement.classList.contains('booked') && !seatElement.classList.contains('unavailable')) {
-                seatElement.classList.toggle('selected');
-
-                const seatIndex = selectedSeats.indexOf(seat.id);
-                if (seatElement.classList.contains('selected') && seatIndex === -1) {
-                    selectedSeats.push(seat.id);
-                } else {
-                    selectedSeats.splice(seatIndex, 1);
-                }
-            }
-        }
-
-        // Clear seat selection
-        function clearSelection() {
-            selectedSeats = [];
-            const seatMap = document.getElementById('seat-map');
-            const seatElements = seatMap.querySelectorAll('.seat');
-            seatElements.forEach(seat => {
-                seat.classList.remove('selected');
-            });
-            updateSelectedSeats();
-        }
-
-        // Display selected seats in the list
-        function updateSelectedSeats() {
-            const selectedSeatsList = document.getElementById('selected-seats-list');
-            selectedSeatsList.innerHTML = ''; // Clear the previous list
-
-            selectedSeats.forEach(seatId => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `Seat ${seatId}`;
-                selectedSeatsList.appendChild(listItem);
-            });
-        }
-
-        // View selected seats (could be expanded for further functionality)
-        function viewSelectedSeats() {
-            alert('Selected seats: ' + selectedSeats.join(', '));
-        }
-
-        // Initialize seat map
-        createSeatMap();
-    </script>
-
+        <div class="summary">
+            
+            <p class="text">Price per seat : <span id="priceperseat">&nbsp;</span> USD  &nbsp; | &nbsp;
+                Seat selected : 
+                <span id="count">0</span> seat  &nbsp;|&nbsp;          
+                Total payment : <span id="total">0</span> USD
+                <!-- <button id="buy" class="buy">BUY</button> -->
+            </p>
+        </div>
+        <div class="bg"></div>
+    <script src="script.js"></script>
 </body>
 </html>
